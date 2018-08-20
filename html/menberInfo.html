@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="./common/head.js" data-title="menberInfo"></script>
+    <div class="menberInfo" id="app">
+        <div class="Photo">
+            <img v-bind:src="menberInfo.show_url" alt="">
+        </div>
+        <div class="message">
+            <div>
+                <span class="name">{{menberInfo.name}}</span>
+                <span class="position">{{menberInfo.station_name}}</span>
+            </div>
+            <div class="school">
+                <!-- {{ menberInfo.description }} -->
+            </div>
+            <!-- <div class="major">
+                主修油画，选修艺术史、室内设计、国画、雕塑。
+            </div>
+            <div class="completeTitle">
+                完成项目
+            </div>
+            <div class="completeContnet">
+                达州银杏柏乐酒店 宜必思连锁酒店 重庆·光宇戴斯大酒店（沙发/软包） 重庆万达·艾美酒店 重庆嘉澜四季酒店 重庆申基大酒店（沙发/软包) 万州国际大酒店 重庆富力凯悦大酒店（沙发/软包） 四川天宏大酒店 重庆铜梁翰林酒店 重庆梦回唐朝娱乐会所
+            </div> -->
+        </div>
+    </div>
+    </body>
+
+</html>
+<script>
+    back();
+    let header = document.getElementsByClassName('headerTitle')[0];
+    header.innerHTML = '团队成员';
+    let id = getQueryString('id');
+    var app = new Vue({
+        el: '#app',
+        data: {
+            menberInfo: {}
+        },
+        methods: {
+
+        },
+        beforeCreate: function () {
+            let that = this;
+            new Promise((resolve, reject) => {
+                $.ajax({
+                    url: baseUrl + '/staff/getStaffById',
+                    dataType: 'json',
+                    method: 'get',
+                    data: {
+                        id: id
+                    },
+                    success: function (res) {
+                        //console.log(res);
+                        res.result = errorimg(res.result);
+                        that.menberInfo = res.result[0];
+                        resolve(1);
+                    }
+                })
+            }).then(() => {
+                let school = document.getElementsByClassName('school')[0];
+                school.innerHTML = that.menberInfo.description;
+            })
+        }
+    })
+</script>

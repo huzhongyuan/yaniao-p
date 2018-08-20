@@ -1,0 +1,22 @@
+.footer {
+  /* height:5rem; */
+  color: white;
+  height:2.5rem;
+}
+.footerNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footerNav img {
+  display: flex;
+  margin: 0px auto;
+  padding: 0rem;
+}
+.footerNav div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0rem;
+  margin: 0rem;
+}

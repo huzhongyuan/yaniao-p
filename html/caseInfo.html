@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <script src="./common/head.js" data-title="caseInfo"></script>
+  <div class="caseInfoBox" id="app">
+    <div class="bigImg">
+      <img v-bind:src="bg" alt="">
+    </div>
+    <div class="imgList">
+      <img v-bind:src="item.show_url" @click="changePhoto(index)" v-for="(item, index) in photoLists" alt="">
+      <!-- <img src="./../images/indexbg.png" alt="">
+      <img src="./../images/indexbg.png" alt="">
+      <img src="./../images/indexbg.png" alt="">
+      <img src="./../images/indexbg.png" alt=""> -->
+    </div>
+    <div class="itemTitleBox">
+      <span class="itemTitleBoxtitle">{{ produce.ch_name }}</span>
+      <!-- <span class="name">四川云之滨大酒店</span> -->
+    </div>
+    <div class="itemcontent" v-html="produce.description"></div>
+  </div>
+  </body>
+
+</html>
+
+<script>
+  // getHeader();
+  let header = document.getElementsByClassName('headerTitle')[0];
+  header.innerHTML = '案例详情';
+  //获取url参数
+  let id = getQueryString('id');
+  //console.log(id);
+  var app = new Vue({
+    el: '#app',
+    data: {
+      produce: {},
+      photoLists: [],
+      bg: ''
+
+    },
+    methods: {
+      changePhoto(index) {
+        //console.log(index);
+        this.bg = this.photoLists[index].show_url;
+      }
+    },
+    beforeCreate: function () {
+      let that = this;
+      new Promise((resolve, reject) => {
+        $.ajax({
+          url: baseUrl + '/product/getProductPicById/' + id,
+          dataType: 'json',
+          method: 'get',
+          success: function (res) {
+            if (res.result.length == 0) {
+              alert("此页面还没有数据");
+              let to_back = document.getElementById('to_back');
+              to_back.onclick = () => {
+                window.location.href = './case.html';
+              }
+              return false;
+            }
+            //console.log(res);
+            res.result = errorimg(res.result);
+            that.photoLists = res.result;
+            //console.log(that.photoLists)
+            that.bg = res.result[0].show_url;
+            resolve(1);
+          }
+        })
+      }).then(() => {
+        $.ajax({
+          url: baseUrl + '/product/getProductDetailById/' + id,
+          dataType: 'json',
+          method: 'get',
+          success: function (res) {
+            //console.log(res);
+            //res.result[0].description = htmlDecode(res.result[0].description);
+            //console.log(res);
+            that.produce = res.result[0];
+            //let itemcontent = document.getElementsByClassName('itemcontent')[0];
+            //itemcontent.innerHTML = that.produce.description;
+            //console.log(that.produce.description);
+
+            //返回上一层
+            let to_back = document.getElementById('to_back');
+            to_back.onclick = () => {
+              window.location.href = './case.html?id=' + that.produce.product_type_id;
+            }
+          }
+        })
+      })
+
+    }
+  })
+</script>

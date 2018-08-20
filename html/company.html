@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <script src="./common/head.js" data-title="company"></script>
+  <div id="app">
+    <div class="title">企业简介</div>
+    <div class="titleList">
+      <span v-for="(item,index) in type" @click="changeTable(index)" :style="{color:colors[index]}">{{ item.name}}</span>
+    </div>
+    <!-- <div class="companyBox">
+      <div class="Photo">
+        <img src="./../images/indexbg.png" alt="">
+      </div>
+    </div> -->
+    <div class="comtent" id="content">
+      {{ content }}
+    </div>
+  </div>
+
+  <script src="./common/foot.js" data-title="company"></script>
+  <script>
+    let returnColor = (that) => {
+      let colors = [];
+      for (let i in that.types) {
+        colors.push('#4D4D4D');
+      }
+      that.colors = colors;
+    }
+    var app = new Vue({
+      el: '#app',
+      data: {
+        type: [],
+        content: '',
+        colors: []
+      },
+      methods: {
+        changeTable(index) {
+          let that = this;
+          returnColor(that);
+          let content = document.getElementById('content');
+          content.innerHTML = that.type[index].description;
+          that.colors[index] = '#C31022';
+        }
+      },
+      beforeCreate: function () {
+        let that = this;
+        returnColor(that);
+        $.ajax({
+          url: baseUrl + '/speechAndOverview/getSpeechAndOverviewByTypeId?type=',
+          dataType: 'json',
+          method: 'get',
+          success: function (res) {
+            //console.log(res);
+            that.type = res.result;
+            let content = document.getElementById('content');
+            content.innerHTML = that.type[0].description;
+            that.colors[0] = '#C31022';
+          }
+        })
+      }
+    })
+  </script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <script src="./common/head.js" data-title="newsInfo"></script>
+  <div class="newsInfo" id="app">
+    <!-- <img v-bind:src="product" alt=""> -->
+    <div class="newTitle">{{ product.title }}</div>
+    <div class="newsTime">{{ product.pushTime }}</div>
+    <div class="newsContent"></div>
+  </div>
+  </body>
+
+</html>
+
+<script>
+  // getHeader();
+  let header = document.getElementsByClassName('headerTitle')[0];
+  header.innerHTML = '新闻详情';
+  //获取url参数
+  let id = getQueryString('id');
+  let index = getQueryString('index');
+  //console.log(index);
+  //console.log(id);
+  var app = new Vue({
+    el: '#app',
+    data: {
+      product: ''
+    },
+    methods: {
+
+    },
+    beforeCreate: function () {
+      let that = this;
+      new Promise((resolve, reject) => {
+        $.ajax({
+          url: baseUrl + '/articlePush/getArticleDetail/' + id,
+          dataType: 'json',
+          method: 'get',
+          success: function (res) {
+            //console.log(res);
+            // if (!res.result.show_url) {
+            //   res.result.show_url = 'http://www.watx365.com/img/zwimg.png';
+            // }
+            res.result.pushTime = timestampToTime(res.result.pushTime);
+            that.product = res.result;
+            resolve(1);
+          }
+        })
+      }).then(() => {
+        let newsContent = document.getElementsByClassName('newsContent')[0];
+        newsContent.innerHTML = that.product.content;
+        //返回上一层
+        let to_back = document.getElementById('to_back');
+        to_back.onclick = () => {
+          if (index && index == 0) {
+            window.location.href = './home.html';
+          } else {
+            window.location.href = './news.html?id=' + that.product.articleType;
+          }
+
+        }
+      })
+
+    }
+  })
+</script>

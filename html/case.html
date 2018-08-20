@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <script src="./common/head.js" data-title="case"></script>
+  <div id="case">
+    <div class="title">案例作品</div>
+    <div class="titleList">
+      <span @click="change_type(index)" v-for="(item,index) in types" :style="{color:colors[index]}">{{item.ch_name}}</span>
+    </div>
+    <div class="caseList">
+      <div class="caseBox" v-for="(item,index) in products" @click="to_produce(index)">
+        <img v-bind:src="item.show_url" alt="">
+        <div class="caseDes">
+          <div class="caseDescrip">{{ item.ch_name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./common/foot.js" data-title="case"></script>
+  <script>
+
+    let returnColor = (that) => {
+      let colors = [];
+      for (let i in that.types) {
+        colors.push('rgba(77,77,77,1)');
+      }
+      that.colors = colors;
+    }
+    var app = new Vue({
+      el: '#case',
+      data: {
+        colors: [],
+        types: [],
+        products: []
+      },
+      methods: {
+        change_type(index) {
+          //console.log(index);
+          let that = this;
+          returnColor(that);
+          let id = that.types[index].id;
+          that.colors[index] = '#C31022';
+          $.ajax({
+            url: baseUrl + '/product/getProductListByFloorId',
+            dataType: 'json',
+            data: {
+              floorId: id
+            },
+            method: 'get',
+            success: function (res) {
+              res.result = errorimg(res.result);
+              //console.log(res);
+              that.products = res.result;
+            }
+          })
+        },
+        to_produce(index) {
+          console.log(index);
+          window.location.href = './caseInfo.html?id=' + this.products[index].id;
+        }
+      },
+      beforeCreate: function () {
+        let id;
+        if (getQueryString('id')) {
+          id = getQueryString('id');
+          //console.log(id);
+          this.isLink = true;
+        } else {
+          this.isLink = false
+        }
+
+        let that = this;
+        new Promise((resolve, reject) => {
+          $.ajax({
+            url: baseUrl + '/floorDistribution/getFloorDistributionListByParentId?parentId=1',
+            dataType: 'json',
+            method: 'get',
+            success: function (res) {
+              //console.log(res);
+              that.types = res.result;
+              resolve(1);
+            }
+          })
+        }).then(() => {
+          //改变颜色
+          if (that.isLink) {
+            returnColor(that);
+            for (let i in that.types) {
+              if (that.types[i].id == id) {
+                //console.log(id);
+                that.colors[i] = '#C31022';
+              }
+            }
+            $.ajax({
+              url: baseUrl + '/product/getProductListByFloorId',
+              dataType: 'json',
+              data: {
+                floorId: id
+              },
+              method: 'get',
+              success: function (res) {
+                console.log(res);
+                that.products = res.result;
+              }
+            })
+          } else {
+            //console.log('false');
+            returnColor(that);
+            that.colors[0] = '#C31022';
+            let id = that.types[0].id;
+            $.ajax({
+              url: baseUrl + '/product/getProductListByFloorId',
+              dataType: 'json',
+              data: {
+                floorId: id
+              },
+              method: 'get',
+              success: function (res) {
+                res.result = errorimg(res.result);
+                //console.log(res);
+                that.products = res.result;
+              }
+            })
+          }
+        })
+      },
+    })
+  </script>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <script src="./common/head.js" data-title="news"></script>
+  <div id="app">
+    <div class="title">企业资讯</div>
+    <div class="titleList">
+      <span @click="change_type(index)" v-for="(item,index) in types" :style="{color:colors[index]}">{{item.name}}</span>
+    </div>
+    <div class="newscontent" v-for="(item,index) in products" @click="to_newInfo(index)">
+      <img v-bind:src="item.show_url" alt="">
+      <div class="newscontenttitle">{{ item.title }}</div>
+      <div class="newscontentcon">{{ item.digest }}</div>
+      <div class="newscontenttime">{{ item.push_time }}</div>
+    </div>
+    <div class="bottom" v-if="bottom">到底了~</div>
+  </div>
+  <script src="./../js/module/aui-scroll.js"></script>
+  <script src="./common/foot.js" data-title="case"></script>
+  <script>
+    //文章列别
+    let isload = false;
+    let loadMore = (that) => {
+      isload = true;
+      //根据详情加载文章列表
+      new Promise((resolve, reject) => {
+        $.ajax({
+          url: baseUrl + '/articlePush/getArticleList',
+          dataType: 'json',
+          data: {
+            article_type: that.article_type,
+            pageNo: that.pageNo,
+            pageSize: 4
+          },
+          method: 'get',
+          success: function (res) {
+            //console.log(res);
+            if (res.result.length == 0) {
+              return false
+            } else {
+              //console.log(res);
+              let products = that.products;
+              for (let i in res.result) {
+                res.result[i].push_time = timestampToTime(res.result[i].push_time);
+                res.result[i].digest = march(res.result[i].digest);
+                products.push(res.result[i]);
+              };
+              that.products = products;
+              that.pageNo++;
+            }
+            isload = false;
+            resolve(res);
+          }
+        })
+      }).then((res) => {
+        if (res.result.length < 4) {
+          that.bottom = true;
+        }
+      })
+
+    }
+
+
+    //颜色重置
+    let returnColor = (that) => {
+      let colors = [];
+      for (let i in that.types) {
+        colors.push('rgba(77,77,77,1)');
+      }
+      that.colors = colors;
+    }
+    let id = null;
+    if (getQueryString('id')) {
+      id = getQueryString('id');
+    }
+    var app = new Vue({
+      el: '#app',
+      data: {
+        colors: [],
+        types: [],
+        products: [],
+        pageNo: 1,
+        bottom: false,
+        article_type: '',
+      },
+      methods: {
+        change_type(index) {
+          this.article_type = this.types[index].id;
+          this.products = [];
+          this.pageNo = 1;
+          this.bottom = false;
+          returnColor(this);
+          this.colors[index] = '#C31022';
+          loadMore(this);
+        },
+        to_newInfo(index) {
+          let id = this.products[index].id;
+          window.location.href = './newsInfo.html?id=' + id;
+        }
+      },
+      beforeCreate: function () {
+        upload(this, loadMore);
+        let that = this;
+        new Promise((resolve, reject) => {
+          //加载文章类别
+          $.ajax({
+            url: baseUrl + '/articleType/getArticleTypeByParentId/1',
+            dataType: 'json',
+            method: 'get',
+            success: function (res) {
+              //console.log(res);
+              that.types = res.result;
+              returnColor(that);
+              that.colors[0] = '#C31022';
+              resolve(1);
+            }
+          })
+        }).then(() => {
+          that.article_type = that.types[0].id;
+          if (id) {
+            that.article_type = id;
+          } else {
+            that.article_type = that.types[0].id;
+          }
+          // console.log(article_type);
+          loadMore(this);
+        });
+      },
+    })
+  </script>

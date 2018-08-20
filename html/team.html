@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="./common/head.js" data-title="team"></script>
+    <div id="app">
+        <div class="teamheader">
+            <div class="teamTitle">专业团队</div>
+            <div class="teamcontent" v-html="describ"></div>
+        </div>
+        <div class="menberBox" v-for="(item,index) in menberList" @click="to_menberInfo(index)">
+            <div class="menberList">
+                <div class="menberPhoto">
+                    <img v-bind:src="item.show_url" alt="">
+                </div>
+                <div class="menberIntroduce">
+                    <div>
+                        <span class="name">{{item.name}}</span>
+                        <span class="position">{{ item.station_name }}</span>
+                    </div>
+                    <div class="school">
+                        <!-- {{ item.description }} -->
+                    </div>
+                    <!-- <div class="introduce">
+                        主修油画，选修艺术史、室 内设计、国画、雕塑。主修油画，选修艺术史、室 内设计、国画、雕塑。主修油画，选修艺术史、室 内设计、国画、雕塑。主修油画，选修艺术史、室 内设计、国画、雕塑。主修油画，选修艺术史、室 内设计、国画、雕塑。
+                    </div>
+                    <div class="compolet">
+                        <div class="competetitle">已完成项目:</div>
+                        <div class="comInfo">达州银杏柏乐酒店、宜必思 连锁酒店、重庆·光宇戴斯...州银杏柏乐酒店、宜必思 连锁酒店、重庆·光宇戴斯.州银杏柏乐酒店、宜必思 连锁酒店、重庆·光宇戴斯.
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="./common/foot.js" data-title="team"></script>
+
+    <script>
+        let isload = false;
+        //加载更多
+        let loadMore = (that) => {
+            //console.log(1111);
+            new Promise((resolve, reject) => {
+                $.ajax({
+                    url: baseUrl + '/staff/getStaffById',
+                    dataType: 'json',
+                    method: 'get',
+                    success: function (res) {
+                        res.result = errorimg(res.result);
+                        //console.log(res);
+                        that.menberList = [];
+                        that.menberList.push(...res.result);
+                        resolve(1);
+                    }
+                })
+            }).then(() => {
+                let school = document.getElementsByClassName('school');
+                for (let i in that.menberList) {
+                    school[i].innerHTML = that.menberList[i].description;
+                }
+
+            })
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+                menberList: [],
+                describ: ''
+            },
+            methods: {
+                to_menberInfo: function (index) {
+                    window.location.href = './menberInfo.html?id=' + this.menberList[index].id;
+                }
+            },
+            beforeCreate: function () {
+                let that = this;
+                //通过栏目ID得到栏目详细信息
+                let id;
+
+                let loadTitle = (id) => {
+                    $.ajax({
+                        url: baseUrl + '/column/getColumnById/' + id,
+                        dataType: 'json',
+                        method: 'get',
+                        success: function (res) {
+                            //console.log(res.result.description);
+                            that.describ = res.result.description;
+                        }
+                    })
+                }
+                if (sessionStorage.getItem('resFooter')) {
+                    let resFooter = sessionStorage.getItem('resFooter');
+                    resFooter = JSON.parse(resFooter);
+                    //console.log(resFooter);
+                    id = resFooter[1].columnId;
+                    //console.log(id);
+                    loadTitle(id);
+                } else {
+                    $.ajax({
+                        url: baseUrl + '/siteInfo',
+                        dataType: 'json',
+                        method: 'get',
+                        success: function (res) {
+                            //console.log(res.h5Footer[1].columnId);
+                            id = res.h5Footer[1].columnId;
+                            loadTitle(id)
+                        }
+                    })
+                }
+
+                upload(this, loadMore);
+                loadMore(this);
+            }
+        })
+    </script>

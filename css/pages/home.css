@@ -1,0 +1,183 @@
+.themeTitle img{
+  width:90%;
+  height:3.75rem;
+}
+
+.img-group {
+  position: relative;
+  widows: 100%;
+  height: 100%;
+}
+.img-tip {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  font-size:0.8rem;
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(255,255,255,1);
+}
+.aui-card-list-header {
+  font-size:0.8rem;
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(51,51,51,1);
+}
+body {
+  margin-bottom: 2.5rem;
+}
+.news {
+  margin: 0rem;
+}
+
+.aui-card-list-header {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+.colline {
+  width:0.1rem;
+  height:0.75rem;
+  background:rgba(195,16,34,1);
+  margin-right: 1rem;
+}
+
+.newsHeader {
+  padding: 0;
+  margin: 0.4rem 0.6rem;
+  font-size:0.7rem;
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(51,51,51,1);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.newscontent {
+  padding: 0;
+  margin: 0.4rem 0.6rem;
+  font-size:0.55rem;
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(215,172,94,1);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.newstimer {
+  padding: 0;
+  margin: 0.4rem 0.6rem;
+  font-size:0.55rem;
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(51,51,51,1);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.teamnav {
+  padding: 0.4rem 0.6rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.team {
+  background: url(./../../images/indexbg.png);
+}
+
+.teamtitle {
+  font-size:0.9rem;
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(255,255,255,1);
+}
+.teamphoto {
+  background-color: transparent;
+}
+.teammenberPhoto {
+  width:5.5rem;
+  height:6.25rem;
+}
+
+.menberdesc {
+  font-size:0.7rem;
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(255,255,255,1);
+}
+.menberposition {
+  font-size:0.55rem;
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(255,255,255,1);
+}
+.teamphotolist {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  margin-left: 0.6rem;
+}
+.teamphotolistInfo {
+  width:2.75rem;
+height:3.5rem;
+}
+.more {
+  margin: 0rem 0.6rem;
+  height: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size:0.7rem;
+  font-family:PingFang-SC-Regular;
+
+}
+.more a {
+  color:rgba(255,255,255,1);
+}
+.describBox {
+  width: 100%;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  overflow: hidden;
+}
+/* .menberdesc {
+  display: flex;
+  width: 2.5rem;
+  flex-direction: row;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+
+}
+.menberposition {
+  display: flex;
+  width: 2.5rem;
+  overflow: hidden;
+} */
+
+@media screen and (max-width: 374px) {
+  .themeTitle img{
+    width:90%;
+    height:3.75rem;
+  }
+  .teammenberPhoto{
+    width: 90%;
+  }
+}
+
+
+/* img:after  {
+  content: url('./../../images/designbg.png');
+  display: block;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+} */
