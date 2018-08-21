@@ -105,6 +105,7 @@
               method: 'get',
               success: function (res) {
                 console.log(res);
+                res.result = errorimg(res.result);
                 that.products = res.result;
               }
             })

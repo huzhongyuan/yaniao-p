@@ -31,6 +31,7 @@
   header.innerHTML = '案例详情';
   //获取url参数
   let id = getQueryString('id');
+  let index = getQueryString('index');
   //console.log(id);
   var app = new Vue({
     el: '#app',
@@ -54,19 +55,15 @@
           dataType: 'json',
           method: 'get',
           success: function (res) {
-            if (res.result.length == 0) {
-              alert("此页面还没有数据");
-              let to_back = document.getElementById('to_back');
-              to_back.onclick = () => {
-                window.location.href = './case.html';
-              }
-              return false;
-            }
             //console.log(res);
-            res.result = errorimg(res.result);
-            that.photoLists = res.result;
-            //console.log(that.photoLists)
-            that.bg = res.result[0].show_url;
+            if (res.result.length == 0) {
+              that.bg = 'http://www.watx365.com/img/zwimg.png';
+              that.produce.ch_name = '暂无数据';
+            } else {
+              res.result = errorimg(res.result);
+              that.photoLists = res.result;
+              that.bg = res.result[0].show_url;
+            }
             resolve(1);
           }
         })
@@ -76,14 +73,8 @@
           dataType: 'json',
           method: 'get',
           success: function (res) {
-            //console.log(res);
-            //res.result[0].description = htmlDecode(res.result[0].description);
-            //console.log(res);
+            console.log(res);
             that.produce = res.result[0];
-            //let itemcontent = document.getElementsByClassName('itemcontent')[0];
-            //itemcontent.innerHTML = that.produce.description;
-            //console.log(that.produce.description);
-
             //返回上一层
             let to_back = document.getElementById('to_back');
             to_back.onclick = () => {
