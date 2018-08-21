@@ -27,6 +27,7 @@
   '<script src="./../js/lib/jquery-3.1.1.min.js"></script>' +
   '<script src="./../js/module/md5.js"></script>' +
   '<script src="./../js/module/utils.js"></script>' +
+  '<style>[v-cloak] { display: none;}</style>' +
   '<script src="./../js/pages/' + headTitle + '.js"></script>';
   document.write(headStyle);
   document.write(head);
