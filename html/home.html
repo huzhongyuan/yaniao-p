@@ -101,6 +101,7 @@
                 teamSecond: []
             },
             methods: {
+                //点击轮播图跳转
                 lunbo_to(index) {
                     window.location.href = this.bgLists[index].herf_url;
                 },
@@ -109,10 +110,11 @@
                     sessionStorage.setItem('local', 2);
                     window.location.href = './case.html?id=' + this.types[index].id;
                 },
-                //转到人员详情
+                //点击团队大图转到人员详情
                 to_detail(index) {
                     window.location.href = './menberInfo.html?id=' + this.teamFrist[index].id;
                 },
+                //点击团队小图跳转到人员详情
                 to_details(index) {
                     //console.log(index);
                     // console.log(this.teamFrist);
@@ -235,30 +237,30 @@
                     })
                 })
             },
-            created: function () {
+            // created: function () {
 
-            },
-            beforeMount: function () {
+            // },
+            // beforeMount: function () {
 
-            },
-            mounted: function () {
+            // },
+            // mounted: function () {
 
-            },
-            beforeUpdate: function () {
+            // },
+            // beforeUpdate: function () {
 
-            },
-            updated: function () {
-                //sessionStorage.setItem('local', 0);
-                // function currentFun(index) {
-                //     console.log(index);
-                // }
-            },
-            beforeDestroy: function () {
+            // },
+            // updated: function () {
+            //     //sessionStorage.setItem('local', 0);
+            //     // function currentFun(index) {
+            //     //     console.log(index);
+            //     // }
+            // },
+            // beforeDestroy: function () {
 
-            },
-            destroyed: function () {
+            // },
+            // destroyed: function () {
 
-            }
+            // }
         })
 
 

@@ -5,7 +5,7 @@ let foot ='<footer class="aui-bar aui-bar-tab footer" id="footer">' +
 '</html>';
 document.write(foot);
 
-
+//底部4主页隐藏返回按钮
 let to_back = document.getElementById('to_back');
 to_back.style.visibility = 'hidden';
 
@@ -18,21 +18,25 @@ let footNav = () => {
     let toteam = document.getElementsByClassName('toteam')[0];
     let tocase = document.getElementsByClassName('tocase')[0];
     let tocompany = document.getElementsByClassName('tocompany')[0];
+    //跳转到主页
     tohome.onclick = (event) => {
         sessionStorage.setItem('local', 0);
         window.location.href = './home.html';
         event.stopPropagation();
     }
+    //跳转到团队
     toteam.onclick = (event) => {
         sessionStorage.setItem('local', 1);
         window.location.href = './team.html';
         event.stopPropagation();
     }
+    //跳转到案例
     tocase.onclick = (event) => {
         sessionStorage.setItem('local', 2);
         window.location.href = './case.html';
         event.stopPropagation();
     }
+    //跳转到公司简介
     tocompany.onclick = (event) => {
         sessionStorage.setItem('local', 3);
         window.location.href = './company.html';
@@ -42,6 +46,7 @@ let footNav = () => {
 // sessionStorage.setItem('resFooter', '');
 // console.log(sessionStorage.getItem('resFooter'));
 
+//底部导航click状态
 let onfocus = () => {
     let local = sessionStorage.getItem('local');
     local = parseInt(local);
@@ -100,10 +105,9 @@ let footerImg = new Promise((resolve, reject) => {
         console.log(res);
         sessionStorage.setItem('resFooter', JSON.stringify(res.h5Footer));
         sessionStorage.setItem('resHeader', JSON.stringify(res.siteInfo));
-        //sessionStorage.setItem('local', 0);
         resFooter = onfocus();
-        writeCommon(resFooter, res.siteInfo);
-        onfocus();
+        writeCommon(resFooter, res.siteInfo); //底部
+        onfocus(); 
         footNav();
         resolve(1);
         }

@@ -35,7 +35,7 @@
 
   if (sessionStorage.getItem('resHeader')) {
     siteInfo =  JSON.parse(sessionStorage.getItem('resHeader'));
-      // 修改头部
+  // 修改头部
   document.title = siteInfo.name;
   //console.log(siteInfo);
   document.getElementsByTagName('meta')[6]['content'] = siteInfo.keywords;
