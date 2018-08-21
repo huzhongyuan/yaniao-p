@@ -212,9 +212,12 @@
                     $.ajax({
                         url: baseUrl + '/staff/getStaffById',
                         dataType: 'json',
+                        data:{
+                            isTop: 1
+                        },
                         method: 'get',
                         success: function (res) {
-                            //console.log(res);
+                            console.log(res);
                             res.result = errorimg(res.result);
                             let teamFrist = [];
                             let teamSecond = [];
