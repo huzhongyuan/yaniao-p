@@ -75,6 +75,10 @@
     let id = null;
     if (getQueryString('id')) {
       id = getQueryString('id');
+    };
+    let indexType = 0;
+    if (getQueryString('index')) {
+      indexType = parseInt(getQueryString('index'));
     }
     var app = new Vue({
       el: '#app',
@@ -85,9 +89,12 @@
         pageNo: 1,
         bottom: false,
         article_type: '',
+        newsindex: indexType
       },
       methods: {
         change_type(index) {
+          this.newsindex = index;
+          console.log(this.newsindex);
           this.article_type = this.types[index].id;
           this.products = [];
           this.pageNo = 1;
@@ -98,7 +105,7 @@
         },
         to_newInfo(index) {
           let id = this.products[index].id;
-          window.location.href = './newsInfo.html?id=' + id;
+          window.location.href = './newsInfo.html?id=' + id+ '&newsindex='+ this.newsindex;
         }
       },
       beforeCreate: function () {
@@ -114,7 +121,7 @@
               //console.log(res);
               that.types = res.result;
               returnColor(that);
-              that.colors[0] = '#C31022';
+              that.colors[indexType] = '#C31022';
               resolve(1);
             }
           })
@@ -129,5 +136,7 @@
           loadMore(this);
         });
       },
+      created: function() {
+      }
     })
   </script>

@@ -21,6 +21,12 @@
   //获取url参数
   let id = getQueryString('id');
   let index = getQueryString('index');
+  let newsindex;
+  if (getQueryString('newsindex')) {
+    newsindex = getQueryString('newsindex');
+  }
+  let i = 0;
+  if (i) console.log(i);
   //console.log(index);
   //console.log(id);
   var app = new Vue({
@@ -57,7 +63,7 @@
           if (index && index == 0) {
             window.location.href = './home.html';
           } else {
-            window.location.href = './news.html?id=' + that.product.articleType;
+            window.location.href = './news.html?id=' + that.product.articleType +'&index=' + newsindex;
           }
 
         }
