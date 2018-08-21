@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <script src="./common/head.js" data-title="news"></script>
-  <div id="app">
+  <div id="app" v-cloak>
     <div class="title">企业资讯</div>
     <div class="titleList">
       <span @click="change_type(index)" v-for="(item,index) in types" :style="{color:colors[index]}">{{item.name}}</span>
