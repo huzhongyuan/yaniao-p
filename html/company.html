@@ -14,13 +14,40 @@
         <img src="./../images/indexbg.png" alt="">
       </div>
     </div> -->
-    <div class="comtent" id="content">
-      {{ content }}
+    <div class="comtent" v-html="content" v-if="!team">
+    </div>
+    <div v-if="team" class="menberBox" v-for="(item,index) in menberList" @click="to_menberInfo(index)">
+      <div class="menberList">
+        <div class="menberPhoto">
+          <img v-bind:src="item.show_url" alt="">
+        </div>
+        <div class="menberIntroduce">
+          <div>
+            <span class="name">{{item.name}}</span>
+            <span class="position">{{ item.station_name }}</span>
+          </div>
+          <div class="school" v-html="">
+            <!-- {{ item.description }} -->
+          </div>
+          <!-- <div class="introduce">
+                    主修油画，选修艺术史、室 内设计、国画、雕塑。主修油画，选修艺术史、室 内设计、国画、雕塑。主修油画，选修艺术史、室 内设计、国画、雕塑。主修油画，选修艺术史、室 内设计、国画、雕塑。主修油画，选修艺术史、室 内设计、国画、雕塑。
+                </div>
+                <div class="compolet">
+                    <div class="competetitle">已完成项目:</div>
+                    <div class="comInfo">达州银杏柏乐酒店、宜必思 连锁酒店、重庆·光宇戴斯...州银杏柏乐酒店、宜必思 连锁酒店、重庆·光宇戴斯.州银杏柏乐酒店、宜必思 连锁酒店、重庆·光宇戴斯.
+                    </div>
+                </div> -->
+        </div>
+      </div>
     </div>
   </div>
 
   <script src="./common/foot.js" data-title="company"></script>
   <script>
+    let isteam = false;
+    if (sessionStorage.getItem('menber')) {
+      isteam = true;
+    }
     let returnColor = (that) => {
       let colors = [];
       for (let i in that.types) {
@@ -28,37 +55,72 @@
       }
       that.colors = colors;
     }
+
+  
+
     var app = new Vue({
       el: '#app',
       data: {
         type: [],
         content: '',
-        colors: []
+        colors: [],
+        team: false,
+        menberList: [],
       },
       methods: {
+        to_menberInfo: function (index) {
+          window.location.href = './menberInfo.html?id=' + this.menberList[index].id;
+        },
         changeTable(index) {
           let that = this;
           returnColor(that);
-          let content = document.getElementById('content');
-          content.innerHTML = that.type[index].description;
+          if (index == 2) {
+            that.team = true;
+          } else {
+            that.team = false;
+            that.content = that.type[index].description;
+          }
+
           that.colors[index] = '#C31022';
         }
       },
       beforeCreate: function () {
         let that = this;
+        let id;
         returnColor(that);
         $.ajax({
           url: baseUrl + '/speechAndOverview/getSpeechAndOverviewByTypeId?type=',
           dataType: 'json',
           method: 'get',
           success: function (res) {
-            //console.log(res);
+            console.log(res);
             that.type = res.result;
-            let content = document.getElementById('content');
-            content.innerHTML = that.type[0].description;
-            that.colors[0] = '#C31022';
+            that.content = that.type[0].description;
+            if (!isteam) {
+              that.colors[0] = '#C31022';
+            }
           }
         })
+
+        $.ajax({
+          url: baseUrl + '/staff/getStaffById',
+          dataType: 'json',
+          method: 'get',
+          success: function (res) {
+            console.log(res);
+            res.result = errorimg(res.result);
+            that.menberList = [];
+            that.menberList.push(...res.result);
+          }
+        })
+      },
+      created: function() {
+        if (isteam) {
+        returnColor(this);
+        this.changeTable(2);
+        }
+
+        sessionStorage.setItem('menber','');
       }
     })
   </script>

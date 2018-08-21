@@ -54,7 +54,6 @@
                         id: id
                     },
                     success: function (res) {
-                        //console.log(res);
                         res.result = errorimg(res.result);
                         that.menberInfo = res.result[0];
                         resolve(1);

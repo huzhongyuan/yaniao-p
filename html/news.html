@@ -37,8 +37,9 @@
           method: 'get',
           success: function (res) {
             //console.log(res);
+            res.result = errorimg(res.result);
             if (res.result.length == 0) {
-              return false
+              
             } else {
               //console.log(res);
               let products = that.products;

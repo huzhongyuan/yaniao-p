@@ -28,9 +28,12 @@
     </section>
     <section class="aui-content-padded news" v-if="newsLists[0]">
       <div class="aui-card-list">
-        <div class="aui-card-list-header" @click="to_news()">
-          <span class="colline"></span>
-          <span>新闻动态</span>
+        <div class="aui-card-list-header newsTitle" >
+          <div class="newsH">
+              <div class="colline"></div>
+              <span>新闻动态</span>
+          </div>
+          <div class="newsmore" @click="to_news()">更多</div>
         </div>
 
       </div>

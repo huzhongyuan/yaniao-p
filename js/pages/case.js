@@ -1,1 +1,1 @@
-sessionStorage.setItem('local', 2);
+sessionStorage.setItem('local', 1);
