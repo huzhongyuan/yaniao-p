@@ -43,6 +43,7 @@
           returnColor(that);
           let id = that.types[index].id;
           that.colors[index] = '#C31022';
+          //导航栏信息
           $.ajax({
             url: baseUrl + '/product/getProductListByFloorId',
             dataType: 'json',
@@ -51,6 +52,7 @@
             },
             method: 'get',
             success: function (res) {
+              //图片异常处理
               res.result = errorimg(res.result);
               //console.log(res);
               that.products = res.result;

@@ -9,6 +9,7 @@ document.write(foot);
 let to_back = document.getElementById('to_back');
 to_back.style.visibility = 'hidden';
 
+
 //返回上一层
 back();
 //点击底部导航跳转
@@ -99,7 +100,7 @@ let footerImg = new Promise((resolve, reject) => {
         console.log(res);
         sessionStorage.setItem('resFooter', JSON.stringify(res.h5Footer));
         sessionStorage.setItem('resHeader', JSON.stringify(res.siteInfo));
-        sessionStorage.setItem('local', 0);
+        //sessionStorage.setItem('local', 0);
         resFooter = onfocus();
         writeCommon(resFooter, res.siteInfo);
         onfocus();
