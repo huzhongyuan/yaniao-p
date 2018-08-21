@@ -28,10 +28,10 @@
     </section>
     <section class="aui-content-padded news" v-if="newsLists[0]">
       <div class="aui-card-list">
-        <div class="aui-card-list-header newsTitle" >
+        <div class="aui-card-list-header newsTitle">
           <div class="newsH">
-              <div class="colline"></div>
-              <span>新闻动态</span>
+            <div class="colline"></div>
+            <span>新闻动态</span>
           </div>
           <div class="newsmore" @click="to_news()">更多</div>
         </div>
@@ -93,7 +93,7 @@
   <script type="text/javascript" src="../js/module/aui-slide.js"></script>
   <script src="./common/foot.js" data-title="home"></script>
   <script>
-
+    sessionStorage.setItem('menber', '');
     var app = new Vue({
       el: '#app',
       data: {
@@ -225,14 +225,14 @@
               res.result = errorimg(res.result);
               let teamFrist = [];
               let teamSecond = [];
-                teamFrist.push(...res.result);
-                that.teamFrist = teamFrist.slice(0,3);
-                if (res.result.length > 3) {
-                  teamSecond.push(...res.result);
-                  that.teamSecond = teamSecond.slice(3);
-                }
+              teamFrist.push(...res.result);
+              that.teamFrist = teamFrist.slice(0, 3);
+              if (res.result.length > 3) {
+                teamSecond.push(...res.result);
+                that.teamSecond = teamSecond.slice(3);
+              }
             },
-            error: function(res) {
+            error: function (res) {
               console.log(res);
             }
           })
