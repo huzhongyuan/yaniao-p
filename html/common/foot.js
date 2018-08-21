@@ -61,19 +61,19 @@ let onfocus = () => {
 let writeCommon = (resFooter, resHeader) => {
     let footerNav = document.createElement('div');
     footerNav.innerHTML = '<div class="aui-bar-tab-item footerNav tohome" tapmode>' +
-        '<img src="' + resFooter[0].addImgUrl + '" class="homeImg" style="width:1rem;height:1rem;">' +
+        '<img src="' + resFooter[0].addImgUrl + '" class="homeImg" style="height:1rem;">' +
         '<div  class="aui-bar-tab-label">' + resFooter[0].columnName + '</div>' +
         '</div>' +
         '<div class="aui-bar-tab-item footerNav tocase" tapmode>' +
-        '<img src="' + resFooter[1].addImgUrl + '" style="width:1rem;height:1rem;" class="teamImg">' +
+        '<img src="' + resFooter[1].addImgUrl + '" style="height:1rem;" class="teamImg">' +
         '<div class="aui-bar-tab-label">' + resFooter[1].columnName + '</div>' +
         '</div>' +
         '<div class="aui-bar-tab-item footerNav tonews" tapmode>' +
-        '<img src="' + resFooter[2].addImgUrl + '"  style="width:1rem;height:1rem;" class="caseImg">' +
+        '<img src="' + resFooter[2].addImgUrl + '"  style="height:1rem;" class="caseImg">' +
         '<div class="aui-bar-tab-label">' + resFooter[2].columnName + '</div>' +
         '</div>' +
         '<div class="aui-bar-tab-item footerNav tocompany" tapmode>' +
-        '<img src="' + resFooter[3].addImgUrl + '"  style="width:1rem;height:1rem;" class="companyImg">' +
+        '<img src="' + resFooter[3].addImgUrl + '"  style="height:1rem;" class="companyImg">' +
         '<div class="aui-bar-tab-label">' + resFooter[3].columnName + '</div>' +
         '</div>';
     let footer = document.getElementById('footer');
