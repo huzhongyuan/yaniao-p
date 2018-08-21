@@ -9,11 +9,17 @@
     <div class="titleList">
       <span @click="change_type(index)" v-for="(item,index) in types" :style="{color:colors[index]}">{{item.name}}</span>
     </div>
-    <div class="newscontent" v-for="(item,index) in products" @click="to_newInfo(index)">
+    <!-- <div class="newscontent" v-for="(item,index) in products" @click="to_newInfo(index)">
       <img v-bind:src="item.show_url" alt="">
-      <div class="newscontenttitle">{{ item.title }}</div>
-      <div class="newscontentcon">{{ item.digest }}</div>
-      <div class="newscontenttime">{{ item.push_time }}</div>
+
+    </div> -->
+    <div class="newscontent1" v-for="(item,index) in products" @click="to_newInfo(index)">
+      <div class="newscontentBox">
+          <div class="newscontenttitle">{{ item.title }}</div>
+          <div class="newscontentcon">{{ item.digest }}</div>
+          <div class="newscontenttime">{{ item.push_time }}</div>
+      </div>
+      <img :src="item.show_url" alt="">
     </div>
     <div class="bottom" v-if="bottom">到底了~</div>
   </div>
@@ -56,6 +62,7 @@
           }
         })
       }).then((res) => {
+        console.log(111111);
         if (res.result.length < 4) {
           that.bottom = true;
         }
