@@ -85,7 +85,7 @@
         <img v-bind:src="item.show_url" class="teamphotolistInfo" v-for="(item,index) in teamSecond" @click="to_details(index)" alt="">
       </div>
       <div class="more">
-        <a href="./team.html">更多</a>
+        <a @click="to_team">更多</a>
       </div>
 
     </div>
@@ -133,6 +133,10 @@
           let id = this.newsLists[index].id;
           window.location.href = './newsInfo.html?id=' + id + '&index=0';
         },
+        to_team() {
+          sessionStorage.setItem('menber',2);
+          window.location.href = './company.html';
+        }
       },
       beforeCreate: function () {
         let that = this;
