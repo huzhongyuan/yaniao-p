@@ -2,7 +2,7 @@
 (function() {
   let cssArr = document.getElementsByTagName('script');
   headTitle = cssArr[0].getAttribute('data-title');
-  let head = '<header class="aui-bar aui-bar-nav header">'+
+  let head = '<header id="header" class="aui-bar aui-bar-nav header">'+
   '<img id="to_back" src="./../images/back.png" />' +
   '<div class = "headerTitle"></div>'+ 
   '<div class="rightblack"></div>'+ 

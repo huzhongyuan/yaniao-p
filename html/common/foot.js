@@ -9,6 +9,8 @@ document.write(foot);
 let to_back = document.getElementById('to_back');
 to_back.style.visibility = 'hidden';
 
+// 有底部隐藏顶部
+document.getElementById('header').style.display = 'none';
 
 //返回上一层
 back();
