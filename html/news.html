@@ -15,9 +15,9 @@
     </div> -->
     <div class="newscontent1" v-for="(item,index) in products" @click="to_newInfo(index)">
       <div class="newscontentBox">
-          <div class="newscontenttitle">{{ item.title }}</div>
-          <div class="newscontentcon">{{ item.digest }}</div>
-          <div class="newscontenttime">{{ item.push_time }}</div>
+        <div class="newscontenttitle">{{ item.title }}</div>
+        <div class="newscontentcon">{{ item.digest }}</div>
+        <div class="newscontenttime">{{ item.push_time }}</div>
       </div>
       <img :src="item.show_url" alt="">
     </div>
@@ -43,9 +43,13 @@
           method: 'get',
           success: function (res) {
             //console.log(res);
+            //console.log(111111);
+            if (res.result.length < 4) {
+              that.bottom = true;
+            }
             res.result = errorimg(res.result);
             if (res.result.length == 0) {
-              
+              return false;
             } else {
               //console.log(res);
               let products = that.products;
@@ -62,10 +66,7 @@
           }
         })
       }).then((res) => {
-        //console.log(111111);
-        if (res.result.length < 4) {
-          that.bottom = true;
-        }
+
       })
 
     }
@@ -112,7 +113,7 @@
         },
         to_newInfo(index) {
           let id = this.products[index].id;
-          window.location.href = './newsInfo.html?id=' + id+ '&newsindex='+ this.newsindex;
+          window.location.href = './newsInfo.html?id=' + id + '&newsindex=' + this.newsindex;
         }
       },
       beforeCreate: function () {
@@ -143,7 +144,7 @@
           loadMore(this);
         });
       },
-      created: function() {
+      created: function () {
       }
     })
   </script>
