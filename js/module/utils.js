@@ -113,7 +113,7 @@ let getHeader = () => {
       }
       window.onscroll = function () {
         // console.log(2222);
-        console.log(getScrollTop() + ';' + getClientHeight() + ';' + getScrollHeight())
+        //console.log(getScrollTop() + ';' + getClientHeight() + ';' + getScrollHeight())
         if (getScrollTop() + getClientHeight() - getScrollHeight() > -50 ) {
           //ajax从这里开始
           //console.log(1111111);
