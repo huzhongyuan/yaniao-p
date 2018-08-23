@@ -38,13 +38,13 @@
           data: {
             article_type: that.article_type,
             pageNo: that.pageNo,
-            pageSize: 5
+            pageSize: 6
           },
           method: 'get',
           success: function (res) {
             //console.log(res);
             //console.log(111111);
-            if (res.result.length < 5) {
+            if (res.result.length < 6) {
               that.bottom = true;
             }
             res.result = errorimg(res.result);
