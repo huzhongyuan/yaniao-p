@@ -18,16 +18,16 @@
         <!--分页容器-->
       </div>
     </div>
-    <section class="aui-grid aui-margin-b-15 themeTitle">
-      <div class="aui-row">
-        <div class="aui-col-xs-4" v-for="(item,index) in types" @click="to_case(index)">
+    <section class="hop-margin-t-15 aui-grid aui-margin-b-15 themeTitle">
+      <div class=" hop-row aui-row">
+        <div class="hop-col-xs-4 aui-col-xs-4" v-for="(item,index) in types" @click="to_case(index)">
           <img v-bind:src=" item.show_url " alt="">
           <div class="img-tip">{{ item.ch_name }}</div>
         </div>
       </div>
     </section>
     <section class="aui-content-padded news" v-if="newsLists[0]">
-      <div class="aui-card-list">
+      <div class="hop-card-list aui-card-list">
         <div class="aui-card-list-header newsTitle">
           <div class="newsH">
             <div class="colline"></div>
@@ -37,7 +37,7 @@
         </div>
 
       </div>
-      <div class="aui-card-list" v-for="(item,index) in newsLists" @click="to_newsList(index)">
+      <div class=" hop-card-list aui-card-list" v-for="(item,index) in newsLists" @click="to_newsList(index)">
         <div class="aui-card-list-content-padded newsHeader">
           {{ item.title }}
         </div>
@@ -198,7 +198,6 @@
               $.ajax({
                 url: baseUrl + '/articlePush/getArticleList',
                 data: {
-                  article_type: id,
                     is_show_home:1,
                   pageNo: 1,
                   pageSize: 200
