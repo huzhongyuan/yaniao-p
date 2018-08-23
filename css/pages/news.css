@@ -11,12 +11,14 @@
   color:rgba(255,255,255,1);
 }
 .titleList {
-  height: 2rem;
+  height:3rem;
+  background-color:rgba(245,245,245,1);
   display: flex;
   align-items: center;
   flex-direction: row;
-  justify-content: space-around;
-  margin: 0rem 0.5rem;
+  /* justify-content: space-around; */
+  justify-content: center;
+  padding: 0rem 0.5rem;
   overflow: scroll;
 }
 .titleList span{
@@ -24,6 +26,7 @@
   font-family:SourceHanSansCN-Regular;
   color:rgba(76,76,76,1);
   /* margin: 0rem 0.5rem; */
+  margin: 0 1rem;
   display: flex;
   white-space:nowrap;
 }
@@ -37,8 +40,9 @@
 
 .newscontenttitle {
   font-size:0.7rem;
-font-family:SourceHanSansCN-Medium;
-color:rgba(0,0,0,1);
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(0,0,0,1);
+  line-height:0.85rem;
 display: -webkit-box;
 -webkit-box-orient: vertical;
 -webkit-line-clamp: 1;
@@ -47,8 +51,9 @@ overflow: hidden;
 .newscontentcon {
   font-size:0.55rem;
   font-family:SourceHanSansCN-Regular;
-  color:rgba(0,0,0,1);
-  margin-top: 0.2rem;
+  color:rgba(51,51,51,1);
+  line-height:0.85rem;
+  margin-top: 0.5rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -57,9 +62,10 @@ overflow: hidden;
 
 .newscontenttime {
   font-size:0.55rem;
-font-family:SourceHanSansCN-Regular;
-color:rgba(0,0,0,1);
-  margin-top: 0.2rem;
+  font-family:SourceHanSansCN-Regular;
+  color:rgba(0,0,0,1);
+  line-height:0.85rem;
+  margin-top: 0.5rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -82,7 +88,7 @@ color:rgba(0,0,0,1);
   margin: 1rem;
   display: flex;
   flex-direction: row;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 .newscontentBox {
   width: 100%;

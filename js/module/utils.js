@@ -112,11 +112,13 @@ let getHeader = () => {
         return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
       }
       window.onscroll = function () {
-        //console.log(2222);
-        if (getScrollTop() + getClientHeight() == getScrollHeight()) {
+        // console.log(2222);
+        console.log(getScrollTop() + ';' + getClientHeight() + ';' + getScrollHeight())
+        if (getScrollTop() + getClientHeight() - getScrollHeight() > -50 ) {
           //ajax从这里开始
-          //console.log(1111111)
+          //console.log(1111111);
           if (!isload) {
+            //console.log(1111);
             loadMore(that);
           }
         }

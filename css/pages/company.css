@@ -14,7 +14,8 @@
   color:rgba(255,255,255,1);
 }
 .titleList {
-  height: 2rem;
+  height:3rem;
+  background:rgba(245,245,245,1);
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -97,25 +98,29 @@
   background-color: #000000;
 }*/
 .name {
-  font-size:0.6rem;
+  font-size:0.75rem;
   font-family:SourceHanSansCN-Regular;
   color:rgba(51,51,51,1);
+  line-height:0.9rem;
 }
 .position {
-  font-size:0.5rem;
+  font-size:0.55rem;
   font-family:SourceHanSansCN-Regular;
   color:rgba(51,51,51,1);
+  line-height:0.9rem;
   opacity: 0.7;
 }
 .school {
-  font-size:0.5rem;
+  max-height: 4rem;
+  overflow: hidden;
+  /* font-size:0.5rem;
   font-family:SourceHanSansCN-Regular;
   color:rgba(51,51,51,1);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
-  opacity: 0.7;
+  opacity: 0.7; */
 }
 .introduce {
   font-size:0.5rem;
@@ -152,13 +157,13 @@ overflow: hidden;
 
 
 .menberPhoto img{
-  width:9rem;
+  width:6rem;
   height: 100%;
 }
-.menberBox {
+/* .menberBox {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
+} */
 .menberList {
   padding:0.5rem 1rem;
   display: flex;
@@ -177,7 +182,9 @@ overflow: hidden;
   width: 100%;
   overflow: hidden;
 }
-
+.menberIBox {
+  margin-top: 0.2rem;
+}
 /* @media screen and (max-width: 18.75rem) {
   .menberPhoto img {
     width:4rem;

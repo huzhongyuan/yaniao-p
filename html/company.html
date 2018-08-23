@@ -22,11 +22,12 @@
           <img v-bind:src="item.show_url" alt="">
         </div>
         <div class="menberIntroduce">
-          <div>
+          <div class="menberIBox">
             <span class="name">{{item.name}}</span>
             <span class="position">{{ item.station_name }}</span>
           </div>
-          <div class="school" v-html="">
+          <div class="school" v-html="item.description">
+            
             <!-- {{ item.description }} -->
           </div>
           <!-- <div class="introduce">
@@ -108,6 +109,9 @@
           method: 'get',
           success: function (res) {
             console.log(res);
+            // for (let i in res.result) {
+            //   res.result[i].description = march(res.result[i].description);
+            // }
             res.result = errorimg(res.result);
             that.menberList = [];
             that.menberList.push(...res.result);

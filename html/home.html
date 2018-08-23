@@ -33,7 +33,7 @@
             <div class="colline"></div>
             <span>新闻动态</span>
           </div>
-          <div class="newsmore" @click="to_news()">更多</div>
+          <div class="newsmore" @click="to_news()"><u>更多</u></div>
         </div>
 
       </div>
@@ -85,7 +85,7 @@
         <img v-bind:src="item.show_url" class="teamphotolistInfo" v-for="(item,index) in teamSecond" @click="to_details(index)" alt="">
       </div>
       <div class="more">
-        <a @click="to_team">更多</a>
+        <a @click="to_team"><u>更多</u></a>
       </div>
 
     </div>
