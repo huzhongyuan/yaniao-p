@@ -42,7 +42,7 @@ let march = (s) => {
 }
 // 设置常数
 const baseUrl = 'http://118.24.159.161:8083/h5';
-//const baseUrl = 'http://mobile.yaniaozg.com:8083/h5';
+//const baseUrl = 'http://mobile.yaniaozg.com:8093/h5';
 // 获取基本信息
 let timeStamp = Date.parse(new Date());
 let token = timeStamp + 'hopynrztoken';
